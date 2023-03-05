@@ -12,7 +12,7 @@ on:
         required: true
 
 env:
-  REGISTRY: "your-digitalocean-registry-container-url"
+  REGISTRY: "registry.digitalocean.com/oratorx-registry"
   IMAGE_NAME: "discord-achievement-bot"
 
 
