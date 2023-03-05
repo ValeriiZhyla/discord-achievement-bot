@@ -14,11 +14,11 @@ on:
 env:
   REGISTRY: "registry.digitalocean.com/oratorx-container-registry"
   IMAGE_NAME: "discord-achievement-bot"
-  DISCORD_BOT_TOKEN: secrets.DISCORD_BOT_TOKEN
-  CHANNEL_ID: secrets.CHANNEL_ID
+  DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+  CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
 
 jobs:
-  build_and_push:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo 
