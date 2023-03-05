@@ -14,8 +14,6 @@ on:
 env:
   REGISTRY: "registry.digitalocean.com/oratorx-container-registry"
   IMAGE_NAME: "discord-achievement-bot"
-  DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-  CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
 
 jobs:
   build:
@@ -25,7 +23,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Build container image
-        run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
+        run: docker build --build-arg DISCORD_BOT_TOKEN=${{ secrets.DISCORD_BOT_TOKEN }} --build-arg CHANNEL_ID=${{ secrets.CHANNEL_ID }} -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
