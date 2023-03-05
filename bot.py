@@ -3,19 +3,21 @@ import os
 DISCORD_BOT_TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 CHANNEL_ID = int(os.environ.get("CHANNEL_ID"))
 
+from discord.ext import commands
 import discord
 
-
-class CircusAchievementBot(discord.Client):
-    async def on_ready(self):
-        print(f'Logged on as {self.user}!')
-
-    async def on_message(self, message):
-        await message.channel.send(f"Hi there! (Mirroring {message})")
+bot = commands.Bot(command_prefix="/", intents=discord.Intents.all())
 
 
-intents = discord.Intents.default()
-intents.message_content = True
+@bot.event
+async def on_ready():
+    channel = bot.get_channel(CHANNEL_ID)
+    await channel.send("Hi there!")
 
-client = CircusAchievementBot(intents=intents)
-client.run(DISCORD_BOT_TOKEN)
+
+@bot.command()
+async def mirror(context, message):
+    await context.send(f"Hi there! Mirroring {message}")
+
+
+bot.run(DISCORD_BOT_TOKEN)
