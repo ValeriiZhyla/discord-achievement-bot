@@ -17,3 +17,5 @@ six==1.16.0
 wcwidth==0.2.6
 win-unicode-console==0.5
 yarl==1.8.2
+
+SQLAlchemy~=2.0.5.post1
