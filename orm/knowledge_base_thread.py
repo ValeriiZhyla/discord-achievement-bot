@@ -1,15 +1,20 @@
 from datetime import datetime
 
 from sqlalchemy import Column, Integer, String, DateTime
-
+from sqlalchemy.orm import relationship
 from base import Base
+from orm.user import User
 
 
-class Achievement(Base):
-    __tablename__ = "knowledge_base_threads"
+class KnowledgeBaseThread(Base):
+    __tablename__ = "knowledge_base_thread"
     id = Column(Integer, primary_key=True)
-    achievement_name = Column(String(1000))
+    name = Column(String(1000))
+    created_at = Column(DateTime())
+    owner = relationship("User", backref="knowledge_base_thread")
 
-    def __init__(self, achievement_id: int, achievement_name: str):
-        self.id = achievement_id
-        self.achievement_name = achievement_name
+    def __init__(self, thread_id: int, created_at: datetime, thread_name: str, owner: User):
+        self.id = thread_id
+        self.created_at = created_at
+        self.name = thread_name
+        self.owner = owner
