@@ -12,9 +12,11 @@ assignments = Table(
 
 class User(Base):
     __tablename__ = "user"
+    __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
     user_name = Column(String(1000))
-    achievements = relationship("achievement", secondary=assignments)
+    achievements = relationship("Achievement", secondary=assignments)
+    # TODO
 
     def __init__(self, user_id: int, user_name: str):
         self.id = user_id

@@ -4,6 +4,7 @@ from datetime import datetime
 from user import User
 from achievement import Achievement
 from knowledge_base_thread import KnowledgeBaseThread
+
 Base.metadata.create_all(engine)
 session = Session()
 
